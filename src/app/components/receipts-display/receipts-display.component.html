@@ -1,0 +1,18 @@
+<div class="card">
+    <div class="card-header">Your Receipts</div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let receipt of receipts">
+          <div class="card">
+            <img [src]="receipt.image" class="card-img-top" alt="Receipt Image">
+            <div class="card-body">
+              <h5 class="card-title">Receipt {{ receipt.id }}</h5>
+              <p class="card-text">Category: {{ receipt.category }}</p>
+              <p class="card-text">Date: {{ receipt.date }}</p>
+              <button class="btn btn-outline-primary btn-sm" (click)="sortReceipt(receipt.id)">Sort</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

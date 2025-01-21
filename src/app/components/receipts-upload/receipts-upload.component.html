@@ -1,0 +1,12 @@
+<div class="card mb-4">
+    <div class="card-header">Upload Receipt</div>
+    <div class="card-body">
+      <form (submit)="onSubmit()">
+        <div class="mb-3">
+          <label for="receiptImage" class="form-label">Upload Receipt Image</label>
+          <input type="file" class="form-control" id="receiptImage" (change)="onFileSelected($event)" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
