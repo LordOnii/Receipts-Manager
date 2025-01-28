@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
-import { AuthService } from "../../services/auth.service";
+import { AuthRequest, AuthService } from "../../services/auth.service";
 import { FormsModule } from "@angular/forms";
 
 @Component({
@@ -20,12 +20,21 @@ export class LoginComponent {
     ) {}
 
     public login() {
-        this.authService.login(this.username, this.password).then((success) => {
-            if (success) {
-                this.router.navigate([""]);
-            } else {
-                alert("Login failed. Please try again.");
-            }
+        this.authService.login(this.username, this.password).subscribe({
+            next: (result) => {
+                if (result.success) {
+                    console.log(result.key);
+                    // this.router.navigate(["/"], {
+                    //     queryParams: { key: result.key },
+                    // });
+                    this.router.navigate(["/home"]);
+                } else {
+                    alert("Login failed. Please try again.");
+                }
+            },
+            error: (error) => {
+                alert("A system error occurred. Probably network related.");
+            },
         });
     }
 }
