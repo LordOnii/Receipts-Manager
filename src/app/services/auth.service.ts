@@ -27,7 +27,7 @@ export class AuthService {
         console.log("Login request sent");
 
         return request.pipe(
-            map((response) => {
+            map((response: AuthRequest) => {
                 this.isAuthenticated = response.success;
                 if (!response.success) console.error("Login failed");
                 return {

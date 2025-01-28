@@ -5,7 +5,6 @@ import { FormsModule } from "@angular/forms";
 
 @Component({
     selector: "app-root",
-    standalone: true,
     imports: [FormsModule],
     templateUrl: "./login.component.html",
     styleUrl: "./login.component.css",
@@ -21,7 +20,7 @@ export class LoginComponent {
 
     public login() {
         this.authService.login(this.username, this.password).subscribe({
-            next: (result) => {
+            next: (result: AuthRequest) => {
                 if (result.success) {
                     console.log(result.key);
                     // this.router.navigate(["/"], {
@@ -32,8 +31,8 @@ export class LoginComponent {
                     alert("Login failed. Please try again.");
                 }
             },
-            error: (error) => {
-                alert("A system error occurred. Probably network related.");
+            error: (error: Error) => {
+                alert("An error occurred. Probably network related.");
             },
         });
     }
