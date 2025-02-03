@@ -1,0 +1,34 @@
+<div class="card mb-4">
+    <div class="card-header">Upload Receipt</div>
+    <div class="card-body">
+        <form (submit)="onSubmit()">
+            <div class="mb-3">
+                <label for="receiptImage" class="form-label"
+                    >Upload Receipt Image</label
+                >
+                <input
+                    type="file"
+                    class="form-control"
+                    id="receiptImage"
+                    (change)="onFileSelected($event)"
+                    accept="image/*"
+                />
+                <!-- display the thumnail if present, else nothing -->
+                <img
+                    class="preview-image"
+                    [src]="thumbnail ? thumbnail : 'data:'"
+                    loading="lazy"
+                    alt="image preview"
+                    width="100"
+                    height="100"
+                />
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <app-editor-box
+            *ngIf="showEditor && image"
+            [imageFile]="image"
+            (close)="showEditor = false"
+        ></app-editor-box>
+    </div>
+</div>
