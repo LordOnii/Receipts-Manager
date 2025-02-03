@@ -22,10 +22,6 @@ export class LoginComponent {
         this.authService.login(this.username, this.password).subscribe({
             next: (result: AuthRequest) => {
                 if (result.success) {
-                    console.log(result.key);
-                    // this.router.navigate(["/"], {
-                    //     queryParams: { key: result.key },
-                    // });
                     this.router.navigate(["/home"]);
                 } else {
                     alert("Login failed. Please try again.");

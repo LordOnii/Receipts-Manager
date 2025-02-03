@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReceiptsUploadComponent } from './receipts-upload.component';
+import { EditorBoxComponent } from './editor-box.component';
 
-describe('ReceiptsUploadComponent', () => {
-  let component: ReceiptsUploadComponent;
-  let fixture: ComponentFixture<ReceiptsUploadComponent>;
+describe('EditorBoxComponent', () => {
+  let component: EditorBoxComponent;
+  let fixture: ComponentFixture<EditorBoxComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ReceiptsUploadComponent]
+      imports: [EditorBoxComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(ReceiptsUploadComponent);
+
+    fixture = TestBed.createComponent(EditorBoxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
