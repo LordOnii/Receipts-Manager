@@ -25,6 +25,8 @@ export class EditorBoxComponent {
     private croppedImage: File = new File([], ""); // temporary
     private ocr = inject(OcrService);
 
+    public debug: string | ArrayBuffer | null = null;
+
     public onClose(): void {
         this.close.emit();
     }
@@ -37,7 +39,6 @@ export class EditorBoxComponent {
             await lastValueFrom(
                 this.ocr.recognize(this.croppedImage).pipe(
                     tap((text: string) => {
-                        console.log(this.croppedImage);
                         console.log("Recognized text:", text);
                     }),
                     catchError((error) => {

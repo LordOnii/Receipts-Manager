@@ -27,6 +27,7 @@ export class CanvasComponent implements OnChanges {
     private startY = 0;
     private currentX = 0;
     private currentY = 0;
+    private scalingRatio = 1;
 
     ngOnChanges(): void {
         if (this.imageFile) {
@@ -47,16 +48,16 @@ export class CanvasComponent implements OnChanges {
         const canvas = this.canvasEl.nativeElement;
         this.ctx = canvas.getContext("2d")!;
 
-        // Set canvas dimensions while maintaining aspect ratio
         const maxWidth = 800;
         const maxHeight = 600;
-        const ratio = Math.min(
+        // Calculate and store the scaling ratio
+        this.scalingRatio = Math.min(
             maxWidth / this.img.width,
             maxHeight / this.img.height,
         );
 
-        canvas.width = this.img.width * ratio;
-        canvas.height = this.img.height * ratio;
+        canvas.width = this.img.width * this.scalingRatio;
+        canvas.height = this.img.height * this.scalingRatio;
 
         this.ctx.drawImage(this.img, 0, 0, canvas.width, canvas.height);
     }
@@ -94,12 +95,12 @@ export class CanvasComponent implements OnChanges {
         if (!this.isDrawing) return;
         this.isDrawing = false;
 
-        // Calculate selected area coordinates
+        // Convert coordinates to original image scale
         const selection = {
-            x: Math.min(this.startX, this.currentX),
-            y: Math.min(this.startY, this.currentY),
-            width: Math.abs(this.currentX - this.startX),
-            height: Math.abs(this.currentY - this.startY),
+            x: Math.min(this.startX, this.currentX) / this.scalingRatio,
+            y: Math.min(this.startY, this.currentY) / this.scalingRatio,
+            width: Math.abs(this.currentX - this.startX) / this.scalingRatio,
+            height: Math.abs(this.currentY - this.startY) / this.scalingRatio,
         };
 
         this.selected.emit(selection);
